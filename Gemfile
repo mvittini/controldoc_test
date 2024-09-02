@@ -18,13 +18,15 @@ gem "stimulus-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
+# Use Sidekiq adapter to run BackgroundJobs
+gem "sidekiq"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
-
+gem 'active_model_serializers'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
@@ -44,8 +46,6 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  # RSpec for testing
-  gem "rspec-rails"
 end
 
 group :development do
@@ -53,5 +53,9 @@ group :development do
   gem "web-console"
 end
 
+group :test do
+  # RSpec for testing
+  gem "rspec-rails"
+end
 
 gem "webpacker", "~> 5.4"

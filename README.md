@@ -1,24 +1,39 @@
-# README
+##### Prerequisites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The setups steps expect following tools installed on the system.
 
-Things you may want to cover:
 
-* Ruby version
+- Ruby [3.2.3]
+- Rails [7.2.1]
 
-* System dependencies
+##### 1. Check out the repository
 
-* Configuration
+```bash
+git clone git@github.com:mvittini/controldoc_test.git
+```
 
-* Database creation
+##### 2. Create database.yml file
 
-* Database initialization
+Copy the sample database.yml file and edit the database configuration as required.
 
-* How to run the test suite
+```bash
+cp config/database.yml.sample config/database.yml
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+##### 3. Run docker project
 
-* Deployment instructions
+Run the following commands to create and setup the database.
 
-* ...
+```ruby
+docker-compose up --build
+```
+
+##### 4. Run Rspec Testing
+
+You can start the rails server using the command given below.
+
+```ruby
+docker-compose --profile test run --rm rspec
+```
+
+And now you can visit the site with the URL http://localhost:3000

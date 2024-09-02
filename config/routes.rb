@@ -12,6 +12,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  get '/show', to: 'maps#show'
-  root to: redirect('/show')
+  get "/show", to: "maps#show"
+  root to: redirect("/show")
+
+  namespace :api do
+    namespace :v1 do
+      resources :gps, only: [:index, :create ]
+    end
+  end
 end

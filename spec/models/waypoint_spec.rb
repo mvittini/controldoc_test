@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe Waypoint, type: :model do
-  let(:vehicle) { Vehicle.new(identifier:"HA-3452") }
+  let(:vehicle) { Vehicle.new(identifier: "HA-3452") }
   let(:waypoint) { described_class.new(latitude: 20.23, longitude: -0.56, sent_at: "2016-06-02 20:45:00", vehicle: vehicle) }
 
   it 'is invalid without latitude' do
@@ -26,5 +26,4 @@ RSpec.describe Waypoint, type: :model do
   it 'is valid with latitude, longitude, sent_at and vehicle' do
     expect(waypoint).to be_valid
   end
-
 end

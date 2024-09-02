@@ -1,0 +1,23 @@
+class Api::V1::GpsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  def create
+    vehicle = Vehicle.find_or_create_by(identifier: gps_params[:vehicle_identifier])
+    vehicle.waypoints.create!(waypoints_params)
+    render json: { vehicle: vehicle, message: "Success" }, status: :accepted
+  end
+
+  def index
+    vehicles = Vehicle.all
+    render json: vehicles, each_serializer: VehicleSerializer
+  end
+
+  private
+
+  def gps_params
+    params.require(:gp).permit(:latitude, :longitude, :sent_at, :vehicle_identifier)
+  end
+
+  def waypoints_params
+    gps_params.except(:vehicle_identifier)
+  end
+end
