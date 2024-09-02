@@ -10,8 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_02_215048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "vehicles", force: :cascade do |t|
+    t.string "identifier", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_vehicles_on_identifier", unique: true
+  end
+
+  create_table "waypoints", force: :cascade do |t|
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.datetime "sent_at", null: false
+    t.bigint "vehicle_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_waypoints_on_vehicle_id"
+  end
+
+  add_foreign_key "waypoints", "vehicles"
 end
