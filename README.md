@@ -19,8 +19,15 @@ Copy the sample database.yml file and edit the database configuration as require
 ```bash
 cp config/database.yml.sample config/database.yml
 ```
+##### 3. Create .env file
 
-##### 3. Run docker project
+Copy the example .env file and edit the enviroment configuration as required.
+
+```bash
+cp example.env .env
+```
+
+##### 4. Run docker project
 
 Run the following commands to create and setup the database.
 
@@ -28,7 +35,7 @@ Run the following commands to create and setup the database.
 docker-compose up --build
 ```
 
-##### 4. Run Rspec Testing
+##### 5. Run Rspec Testing
 
 You can start the rails server using the command given below.
 
@@ -36,7 +43,7 @@ You can start the rails server using the command given below.
 docker-compose --profile test run --rm rspec
 ```
 
-##### 5. Run Seeds
+##### 6. Run Seeds
 
 You can run seed to populate Vehicles and Waypoints
 
