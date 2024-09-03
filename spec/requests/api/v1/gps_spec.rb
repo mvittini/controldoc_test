@@ -63,4 +63,29 @@ RSpec.describe "Api::V1::Gps", type: :request do
       expect(vehicle2_response).to include('identifier'=> "BW-2222", "latitude" => 15.23, "longitude" => -1.56)
     end
   end
+
+  describe "GET /api/v1/gps/:identifier" do
+    let(:vehicle1) { Vehicle.create!(identifier: "HA-3452") }
+    let(:vehicle2) { Vehicle.create!(identifier: "BW-2222") }
+    let!(:waypoint1) { vehicle1.waypoints.create!(latitude: 20.23, longitude: -0.56, sent_at: "2016-06-02 20:45:00") }
+    let!(:waypoint2) { vehicle1.waypoints.create!(latitude: 10.33, longitude: -0.46, sent_at: "2024-08-12 00:05:00") }
+    let!(:waypoint3) { vehicle2.waypoints.create!(latitude: 15.23, longitude: -1.56, sent_at: "2018-06-02 20:45:00") }
+
+    context "when the vehicle exists" do
+      it "returns the vehicle" do
+        get "/api/v1/gps/#{vehicle1.identifier}"
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "when the vehicle does not exist" do
+      it "returns a 404 status" do
+        get "/api/v1/gps/nonexistent_identifier"
+
+        expect(response).to have_http_status(:not_found)
+        expect(JSON.parse(response.body)["error"]).to eq("Vehicle not found")
+      end
+    end
+  end
 end

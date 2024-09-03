@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :gps, only: [:index, :create ]
+      resources :gps, only: [:index, :create, :show ]
     end
   end
 end

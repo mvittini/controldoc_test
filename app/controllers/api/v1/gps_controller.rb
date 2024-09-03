@@ -11,6 +11,13 @@ class Api::V1::GpsController < ApplicationController
     render json: vehicles, each_serializer: VehicleSerializer
   end
 
+  def show
+    vehicle = Vehicle.find_by!(identifier: params[:id])
+    render json: vehicle, serializer: VehicleSerializer
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Vehicle not found" }, status: :not_found
+  end
+
   private
 
   def gps_params

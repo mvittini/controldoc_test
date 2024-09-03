@@ -1,6 +1,6 @@
 # Base image
 FROM ruby:3.2.3
-
+USER root
 # Set environment variables
 ENV RAILS_ENV=development
 ENV NODE_ENV=development
