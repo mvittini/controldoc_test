@@ -36,4 +36,12 @@ You can start the rails server using the command given below.
 docker-compose --profile test run --rm rspec
 ```
 
+##### 5. Run Seeds
+
+You can run seed to populate Vehicles and Waypoints
+
+```ruby
+docker-compose run web bundle exec rake db:seed_vehicles_and_waypoints
+```
+
 And now you can visit the site with the URL http://localhost:3000
