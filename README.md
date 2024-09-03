@@ -17,7 +17,7 @@ git clone git@github.com:mvittini/controldoc_test.git
 Copy the sample database.yml file and edit the database configuration as required.
 
 ```bash
-cp config/database.yml.sample config/database.yml
+cp config/database.yml.sample.sample config/database.yml.sample
 ```
 
 ##### 3. Run docker project
