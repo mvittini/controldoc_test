@@ -9,14 +9,11 @@ ENV NODE_ENV=development
 # Install dependencies
 RUN apt-get update -qq && apt-get install -y \
   curl \
+  nodejs \
   postgresql-client \
   build-essential
 
-# Instalar Node.js 16 desde NodeSource
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -y nodejs
-
-# Instalar Yarn
+# Install Yarn and Webpack dependencies
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install yarn -y
