@@ -1,12 +1,25 @@
 # Base image
 FROM ruby:3.2.3
 USER root
+
 # Set environment variables
 ENV RAILS_ENV=development
 ENV NODE_ENV=development
 
 # Install dependencies
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y \
+  curl \
+  postgresql-client \
+  build-essential
+
+# Instalar Node.js 16 desde NodeSource
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs
+
+# Instalar Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install yarn -y
 
 # Set working directory
 WORKDIR /myapp
@@ -18,15 +31,14 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 # Install gems
 RUN bundle install
 
-# Install Yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install yarn -y
-
 # Copy the rest of the application code
 COPY . /myapp
 
-# Precompile assets
+# Install JavaScript dependencies
+RUN yarn install
+
+# Compile assets
+RUN bundle exec rails webpacker:compile
 
 # Expose the port on which the app will run
 EXPOSE 3000

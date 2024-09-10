@@ -17,15 +17,16 @@ git clone git@github.com:mvittini/controldoc_test.git
 Copy the sample database.yml file and edit the database configuration as required.
 
 ```bash
-cp config/database.yml.sample.sample config/database.yml.sample
+mv config/database.yml.sample config/database.yml
 ```
 ##### 3. Create .env file
 
 Copy the example .env file and edit the enviroment configuration as required.
 
 ```bash
-cp example.env .env
+mv example.env .env
 ```
+Set your Google Maps Api key
 
 ##### 4. Run docker project
 
@@ -49,6 +50,14 @@ You can run seed to populate Vehicles and Waypoints
 
 ```ruby
 docker-compose run web bundle exec rake db:seed_vehicles_and_waypoints
+```
+
+##### 7. Run docker project
+
+Run the following commands to create and setup the database.
+
+```ruby
+docker-compose up
 ```
 
 And now you can visit the site with the URL http://localhost:3000
