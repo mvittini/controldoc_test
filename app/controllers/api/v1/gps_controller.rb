@@ -21,7 +21,8 @@ class Api::V1::GpsController < ApplicationController
   private
 
   def gps_params
-    params.require(:gp).permit(:latitude, :longitude, :sent_at, :vehicle_identifier)
+    parameters = params[:gp] || params
+    parameters.permit(:latitude, :longitude, :sent_at, :vehicle_identifier)
   end
 
   def waypoints_params
